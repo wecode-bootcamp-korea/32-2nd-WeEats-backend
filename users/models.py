@@ -1,3 +1,8 @@
-from django.db import models
+from django.db   import models
+from core.models import TimeStampedModel
 
-# Create your models here.
+class User(TimeStampedModel):
+    kakao_id = models.BigIntegerField()
+
+    class Meta :
+        db_table = 'users'
