@@ -16,7 +16,7 @@ class KakaoSignIn(View):
             access_token       = request.headers.get('Authorization')
             kakao_info_api     = 'https://kapi.kakao.com/v2/user/me'
             headers            = {'Authorization':f'Bearer ${access_token}'}
-            user_info_response = requests.get(kakao_info_api,headers=headers, timeout=5)
+            user_info_response = requests.get(kakao_info_api, headers=headers, timeout=5)
             user_info          = user_info_response.json()
             kakao_id           = user_info['id']
             nickname           = user_info['properties']['nickname']
@@ -36,9 +36,9 @@ class KakaoSignIn(View):
             user_id      = User.objects.get(kakao_id=kakao_id).id
             access_token = jwt.encode({'id': user_id, 'exp':datetime.utcnow() + timedelta(days=1)}, SECRET_KEY, algorithm=ALGORITHM)
 
-            return JsonResponse({'access_token' : access_token},status=200)
+            return JsonResponse({'access_token' : access_token}, status=200)
         except KeyError:
-            return JsonResponse({'message':'keyerror'},status=400)
+            return JsonResponse({'message':'keyerror'}, status=400)
         except requests.exceptions.Timeout:
             return HttpResponse(status=408)
 
@@ -52,4 +52,4 @@ class KakaoSignIn(View):
             'id'            : user.id,
             'name'          : name,
             'profile_image' : profile_image,
-        },status=200)
+        }, status=200)
