@@ -16,5 +16,10 @@ Including another URLconf
 from django.urls import path,include
 
 urlpatterns = [
-    path('users',include('users.urls'))
+    path('users',include('users.urls')),
+<<<<<<< HEAD
+    path('restaurnats',include('restaurants.urls'))
+=======
+    path('restaurant',include('restaurants.urls'))
+>>>>>>> 47d5bf3 (2)
 ]
