@@ -4,12 +4,18 @@ from users.models       import User
 from restaurants.models import Restaurant
 
 class Reservation(TimeStampedModel):
-    restaurant    = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    user          = models.ForeignKey(User, on_delete=models.CASCADE)
-    status        = models.ForeignKey('ReservationStatus', on_delete=models.CASCADE)
-    date          = models.DateField()
-    start_time    = models.TimeField()
-    end_time      = models.TimeField()
+    TIMESLOT_LIST = (
+        (1, "12:00 - 14:00"),
+        (2, "14:00 - 16:00"),
+        (3, "16:00 - 18:00"),
+        (4, "18:00 - 20:00"),
+        (5, "20:00 - 22:00"),
+    )
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    user       = models.ForeignKey(User, on_delete=models.CASCADE)
+    status     = models.ForeignKey('ReservationStatus', on_delete=models.CASCADE)
+    date       = models.DateField()
+    timeslot      = models.IntegerField(choices=TIMESLOT_LIST)
     visitor_count = models.PositiveIntegerField()
 
     class Meta:

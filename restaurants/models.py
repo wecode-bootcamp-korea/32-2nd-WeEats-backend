@@ -1,6 +1,4 @@
 from django.db   import models
-from core.models import TimeStampedModel
-
 class Restaurant(models.Model):
     name            = models.CharField(max_length=500)
     category        = models.ForeignKey('Category', on_delete=models.CASCADE)
@@ -10,6 +8,8 @@ class Restaurant(models.Model):
     open_time       = models.TimeField()
     close_time      = models.TimeField()
     thumbnail_image = models.OneToOneField('Restaurant_Image', on_delete=models.CASCADE)
+    detail_image    = models.CharField(max_length=500)
+    max_capacity    = models.PositiveIntegerField()
     
     class Meta:
         db_table = 'restaurants'
