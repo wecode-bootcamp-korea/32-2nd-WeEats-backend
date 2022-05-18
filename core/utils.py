@@ -2,7 +2,10 @@ import re
 import requests
 
 from django.core.exceptions import ValidationError
+from django.http import JsonResponse
 
+REGEX_CATEGORY = '[1-6]'
+REGEX_ORDER    = '^random$'
 class KakaoAPI:
     def __init__(self, access_token):
         self.access_token   = access_token
@@ -15,9 +18,6 @@ class KakaoAPI:
         user_info          = user_info_response.json()
 
         return user_info
-
-REGEX_CATEGORY = '[1-6]'
-REGEX_ORDER    = '^random$'
 
 def validate_category(category_id):
     if not re.match(REGEX_CATEGORY, category_id):
