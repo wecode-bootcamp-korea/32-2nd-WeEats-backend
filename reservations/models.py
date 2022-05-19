@@ -1,4 +1,5 @@
 from django.db          import models
+from core.decorator     import log_in_decorator
 from core.models        import TimeStampedModel
 from users.models       import User
 from restaurants.models import Restaurant
@@ -20,9 +21,13 @@ class Reservation(TimeStampedModel):
 
     class Meta:
         db_table = 'reservations'
+        constraints = [models.UniqueConstraint(
+            fields=['restaurant', 'date', 'timeslot'], 
+            name='unique_reservation'
+        )]
 
 class ReservationStatus(models.Model):
     status = models.CharField(max_length=100)
 
     class Meta:
-        db_table ='reservation_statuses'
+        db_table = 'reservation_statuses'

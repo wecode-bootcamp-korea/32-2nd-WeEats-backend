@@ -1,6 +1,20 @@
 import re
+import requests
 
 from django.core.exceptions import ValidationError
+
+class KakaoAPI:
+    def __init__(self, access_token):
+        self.access_token   = access_token
+        self.kakaologin_url = 'https://kapi.kakao.com/v2/user/me'
+        self.kakaomap_url   = 'https://kapi.kakao.com/v2/user/kakaomap'
+
+    def get_kakao_user(self):
+        headers            = {'Authorization':f'Bearer ${self.access_token}'}
+        user_info_response = requests.get(self.kakaologin_url,headers=headers, timeout=5)
+        user_info          = user_info_response.json()
+
+        return user_info
 
 REGEX_CATEGORY = '[1-6]'
 REGEX_ORDER    = '^random$'
