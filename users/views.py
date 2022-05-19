@@ -2,13 +2,13 @@ import json
 import jwt
 import requests
 
-from django.http      import JsonResponse, HttpResponse
-from django.views     import View
+from django.http         import JsonResponse, HttpResponse
+from django.views        import View
 
-from users.models     import User
-from we_eats.settings import SECRET_KEY,ALGORITHM
-from datetime         import datetime, timedelta
-from core.decorator   import log_in_decorator
+from users.models        import User
+from we_eats.settings    import SECRET_KEY,ALGORITHM
+from datetime            import datetime, timedelta
+from core.decorator      import log_in_decorator
 
 class KakaoSignIn(View):
     def post(self, request):
