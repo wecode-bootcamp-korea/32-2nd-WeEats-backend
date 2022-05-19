@@ -1,7 +1,8 @@
 import jwt
+import json
 import requests
 
-from django.http      import JsonResponse, HttpResponse
+from django.http      import JsonResponse
 from django.views     import View
 
 from core.utils       import KakaoAPI
@@ -36,10 +37,9 @@ class KakaoSignIn(View):
             access_token = jwt.encode({'id':user_id, 'exp':datetime.utcnow() + timedelta(days=1)}, SECRET_KEY, algorithm=ALGORITHM)
 
             return JsonResponse({'access_token' : access_token}, status=200)
+
         except KeyError:
-            return JsonResponse({'message':'keyerror'}, status=401)
-        except requests.exceptions.Timeout:
-            return HttpResponse(status=408)
+            return JsonResponse({'message' : 'KEY_ERROR'}, status=400)
 
     @log_in_decorator
     def get(self,request):
