@@ -11,10 +11,10 @@ class Reservation(TimeStampedModel):
         (4, "18:00 - 20:00"),
         (5, "20:00 - 22:00"),
     )
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    user       = models.ForeignKey(User, on_delete=models.CASCADE)
-    status     = models.ForeignKey('ReservationStatus', on_delete=models.CASCADE)
-    date       = models.DateField()
+    restaurant    = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    user          = models.ForeignKey(User, on_delete=models.CASCADE)
+    status        = models.ForeignKey('ReservationStatus', on_delete=models.CASCADE)
+    date          = models.DateField()
     timeslot      = models.IntegerField(choices=TIMESLOT_LIST)
     visitor_count = models.PositiveIntegerField()
 
