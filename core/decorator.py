@@ -15,10 +15,12 @@ def log_in_decorator(func):
             return func(self, request, *args, **kwargs)
 
         except User.DoesNotExist:
-            return JsonResponse({'message':'INVALID_USER'}, status=401)
+            return JsonResponse({'message' : 'INVALID_USER'},status=401)
         except jwt.InvalidSignatureError:
-            return JsonResponse({'message':'INVALID_SIGNATURE'}, status=401)
+            return JsonResponse({'message' : 'INVALID_SIGNATURE'},status=401)
         except jwt.DecodeError:
-            return JsonResponse({'message':'INVALID_PAYLOAD'}, status=401)
+            return JsonResponse({'message' : 'INVALID_PAYLOAD'},status=401)
+        except jwt.exceptions.ExpiredSignatureError:
+            return JsonResponse({'message' : 'EXPIRED_TOKEN'}, status=401)
 
     return wrapper
