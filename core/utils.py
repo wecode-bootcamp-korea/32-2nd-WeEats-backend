@@ -2,12 +2,8 @@ import re
 import requests
 
 from django.core.exceptions import ValidationError
-<<<<<<< HEAD
-from django.http import JsonResponse
-=======
 from django.http            import JsonResponse
 
->>>>>>> 5094d89 (Add : login test)
 
 REGEX_CATEGORY = '[1-6]'
 REGEX_ORDER    = '^random$'
